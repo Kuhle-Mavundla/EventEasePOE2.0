@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using EventEasePOE2._0.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<EventEasePOE2_0Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EventEasePOE2_0Context") ?? throw new InvalidOperationException("Connection string 'EventEasePOE2_0Context' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

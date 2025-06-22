@@ -7,4 +7,8 @@
     <RootNamespace>EventEasePOE2._0</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.24.1" />
+  </ItemGroup>
+
 </Project>

@@ -32,19 +32,19 @@ namespace EventEasePOE2._0.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Booking booking)
+        public Task<IActionResult> Create(Booking booking)
         {
             if (ModelState.IsValid)
             {
                 var success = _bookingService.TryCreateBooking(booking);
                 if (success)
-                    return RedirectToAction(nameof(Index));
+                    return Task.FromResult<IActionResult>(RedirectToAction(nameof(Index)));
 
                 ModelState.AddModelError("", "This venue is not available during the selected period.");
             }
             ViewBag.Venues = new SelectList(_context.Venues, "VenueId", "Name", booking.VenueId);
             ViewBag.Events = new SelectList(_context.Events, "EventId", "Name", booking.EventId);
-            return View(booking);
+            return Task.FromResult<IActionResult>(View(booking));
         }
 
         public async Task<IActionResult> Details(int id)

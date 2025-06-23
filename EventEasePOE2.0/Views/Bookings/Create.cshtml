@@ -1,56 +1,33 @@
 ﻿@model EventEasePOE2._0.Models.Booking
 
-@{
-    ViewData["Title"] = "Create";
-}
+@using Microsoft.AspNetCore.Mvc.Rendering
 
-<h1>Create</h1>
+<h2>Create Booking</h2>
 
-<h4>Booking</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="EventId" class="control-label"></label>
-                <select asp-for="EventId" class ="form-control" asp-items="ViewBag.EventId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="VenueId" class="control-label"></label>
-                <select asp-for="VenueId" class ="form-control" asp-items="ViewBag.VenueId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <div>
+        <label>Event</label>
+        <select asp-for="EventId" asp-items="ViewBag.Events">
+            <option value="">-- Select Event --</option>
+        </select>
     </div>
-</div>
+    <div>
+        <label>Venue</label>
+        <select asp-for="VenueId" asp-items="ViewBag.Venues">
+            <option value="">-- Select Venue --</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="date" />
+        <span asp-validation-for="StartDate"></span>
+    </div>
+    <div>
+        <label asp-for="Status"></label>
+        <input asp-for="Status" />
+        <span asp-validation-for="Status"></span>
+    </div>
+    <button type="submit">Create</button>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<a asp-action="Index">Back to List</a>

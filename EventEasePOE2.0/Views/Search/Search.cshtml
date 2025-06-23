@@ -1,0 +1,30 @@
+﻿@model EventEasePOE2._0.Models.Event
+@{
+    ViewData["Title"] = "Search Venues";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="SearchResults" method="post">
+    <div>
+        <label>Event Type:</label>
+        <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes">
+            <option value="">-- Select Event Type --</option>
+        </select>
+    </div>
+    <div>
+        <label>Venue:</label>
+        <select asp-for="VenueId" asp-items="ViewBag.Venues">
+            <option value="">-- Select Venue --</option>
+        </select>
+    </div>
+    <div>
+        <label>Start Date:</label>
+        <input type="date" name="startDate" value="@ViewBag.StartDate" />
+    </div>
+    <div>
+        <label>End Date:</label>
+        <input type="date" name="endDate" value="@ViewBag.EndDate" />
+    </div>
+    <button type="submit">Search</button>
+</form>

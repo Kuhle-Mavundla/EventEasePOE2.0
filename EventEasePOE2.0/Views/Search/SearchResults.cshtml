@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EventEasePOE2._0.Models.Venue>
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (!Model.Any())
+{
+    <p>No venues available matching your criteria.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Venue Name</th>
+                <th>Location</th>
+                <th>Capacity</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var venue in Model)
+            {
+                <tr>
+                    <td>@venue.Name</td>
+                    <td>@venue.Location</td>
+                    <td>@venue.Capacity</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(venue.ImageUrl))
+                        {
+                            <img src="@venue.ImageUrl" alt="Image" width="100" />
+                        }
+                        else
+                        {
+                            <span>No Image</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-action="Search">Back to Search</a>

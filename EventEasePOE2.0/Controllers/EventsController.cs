@@ -17,9 +17,10 @@ namespace EventEasePOE.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var events = _context.Events.Include(e => e.Venue).Include(e => e.EventType);
-            return View(await events.ToListAsync());
+            var events = await _context.Events.Include(e => e.EventType).Include(e => e.Venue).ToListAsync();
+            return View(events); // Will look for Views/Events/Index.cshtml
         }
+
 
         public IActionResult Create()
         {

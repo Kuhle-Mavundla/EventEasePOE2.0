@@ -2,33 +2,18 @@
 
 <h2>Events</h2>
 
-<a asp-action="Create">Create New Event</a>
-
 <table>
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Venue</th>
-            <th>Event Type</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+        <tr><th>Name</th><th>Date</th><th>Type</th><th>Venue</th></tr>
     </thead>
     <tbody>
-        @foreach (var ev in Model)
+        @foreach (var item in Model)
         {
             <tr>
-                <td>@ev.Name</td>
-                <td>@ev.Venue?.Name</td>
-                <td>@ev.EventType?.Name</td>
-                <td>@ev.EventDate.ToShortDateString()</td>
-                <td>@ev.Status</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@ev.EventId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@ev.EventId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@ev.EventId">Delete</a>
-                </td>
+                <td>@item.Name</td>
+                <td>@item.EventDate.ToShortDateString()</td>
+                <td>@item.EventType?.Name</td>
+                <td>@item.Venue?.Name</td>
             </tr>
         }
     </tbody>

@@ -10,7 +10,7 @@
     <p><strong>Capacity:</strong> @Model.Capacity</p>
 </div>
 
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete" method="post">
     <input type="hidden" asp-for="VenueId" />
     <button type="submit">Delete</button> |
     <a asp-action="Index">Cancel</a>

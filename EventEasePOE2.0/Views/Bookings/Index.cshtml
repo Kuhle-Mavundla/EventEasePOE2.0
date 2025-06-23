@@ -5,6 +5,42 @@
 }
 
 <h2>Bookings</h2>
+
+<form method="get" asp-action="Index">
+    <div>
+        <label>Event Name:</label>
+        <input type="text" name="eventName" value="@ViewData["CurrentFilter"]" />
+    </div>
+    <div>
+        <label>Venue:</label>
+        <select name="venueId">
+            <option value="">-- All Venues --</option>
+            @foreach (var venue in ViewBag.Venues)
+            {
+                <option value="@venue.VenueId">@venue.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <label>Status:</label>
+        <select name="status">
+            <option value="">-- All Statuses --</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="cancelled">Cancelled</option>
+        </select>
+    </div>
+    <div>
+        <label>Start Date:</label>
+        <input type="date" name="startDate" value="@ViewBag.StartDate" />
+    </div>
+    <div>
+        <label>End Date:</label>
+        <input type="date" name="endDate" value="@ViewBag.EndDate" />
+    </div>
+    <button type="submit">Search</button>
+</form>
+
 <a asp-action="Create">Create New Booking</a>
 
 <table>

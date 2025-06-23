@@ -18,16 +18,35 @@ namespace EventEasePOE2._0.Controllers
             _bookingService = bookingService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string eventName, int? venueId, string status, DateTime? startDate, DateTime? endDate)
         {
-            var bookings = await _context.Bookings
-                .Include(b => b.Event).ThenInclude(e => e.EventType)
+            ViewData["CurrentFilter"] = eventName;
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
+            ViewBag.Venues = await _context.Venues.ToListAsync();
+
+            var bookings = _context.Bookings
+                .Include(b => b.Event)
                 .Include(b => b.Venue)
-                .ToListAsync();
-            return View(bookings); // Will look for Views/Bookings/Index.cshtml
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(eventName))
+                bookings = bookings.Where(b => b.Event != null && b.Event.Name.Contains(eventName));
+
+            if (venueId.HasValue)
+                bookings = bookings.Where(b => b.VenueId == venueId);
+
+            if (!string.IsNullOrEmpty(status))
+                bookings = bookings.Where(b => b.Status == status);
+
+            if (startDate.HasValue)
+                bookings = bookings.Where(b => b.StartDate >= startDate.Value);
+
+            if (endDate.HasValue)
+                bookings = bookings.Where(b => b.EndDate <= endDate.Value);
+
+            return View(await bookings.ToListAsync());
         }
-
-
         public IActionResult Create()
         {
             ViewBag.Venues = new SelectList(_context.Venues, "VenueId", "Name");

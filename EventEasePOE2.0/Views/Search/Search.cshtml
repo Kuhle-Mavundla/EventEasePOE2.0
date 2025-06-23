@@ -1,30 +1,35 @@
 ﻿@model EventEasePOE2._0.Models.Event
+
 @{
     ViewData["Title"] = "Search Venues";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h2 class="mb-4">@ViewData["Title"]</h2>
 
 <form asp-action="SearchResults" method="post">
-    <div>
-        <label>Event Type:</label>
-        <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes">
-            <option value="">-- Select Event Type --</option>
-        </select>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Event Type:</label>
+            <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes" class="form-select">
+                <option value="">-- Select Event Type --</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Venue:</label>
+            <select asp-for="VenueId" asp-items="ViewBag.Venues" class="form-select">
+                <option value="">-- Select Venue --</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Start Date:</label>
+            <input type="date" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">End Date:</label>
+            <input type="date" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+        </div>
+        <div class="col-12 d-flex justify-content-start">
+            <button type="submit" class="btn btn-primary mt-3">Search</button>
+        </div>
     </div>
-    <div>
-        <label>Venue:</label>
-        <select asp-for="VenueId" asp-items="ViewBag.Venues">
-            <option value="">-- Select Venue --</option>
-        </select>
-    </div>
-    <div>
-        <label>Start Date:</label>
-        <input type="date" name="startDate" value="@ViewBag.StartDate" />
-    </div>
-    <div>
-        <label>End Date:</label>
-        <input type="date" name="endDate" value="@ViewBag.EndDate" />
-    </div>
-    <button type="submit">Search</button>
 </form>

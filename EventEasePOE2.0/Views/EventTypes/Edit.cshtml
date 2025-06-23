@@ -1,19 +1,31 @@
 ﻿@model EventEasePOE2._0.Models.EventType
 
-<h2>Edit Event Type</h2>
+@{
+    ViewData["Title"] = "Edit Event Type";
+}
 
-<form asp-action="Edit" method="post">
+<h2 class="mb-4">@ViewData["Title"]</h2>
+
+<form asp-action="Edit" method="post" class="needs-validation" novalidate>
     <input type="hidden" asp-for="EventTypeId" />
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
+
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"></textarea>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
     </div>
-    <button type="submit">Save</button>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
 </form>
 
-<a asp-action="Index">Back to List</a>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

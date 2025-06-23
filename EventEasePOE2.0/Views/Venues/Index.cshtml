@@ -1,40 +1,54 @@
 ﻿@model IEnumerable<EventEasePOE2._0.Models.Venue>
 
-<h2>Venues</h2>
+@{
+    ViewData["Title"] = "Venues";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<a asp-action="Create">Create New Venue</a>
+<h2 class="mb-4">Venues</h2>
 
-<table>
-    <thead>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<a asp-action="Create" class="btn btn-success mb-3">Add New Venue</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
         <tr>
             <th>Name</th>
             <th>Location</th>
             <th>Capacity</th>
             <th>Image</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var venue in Model)
+        @foreach (var v in Model)
         {
             <tr>
-                <td>@venue.Name</td>
-                <td>@venue.Location</td>
-                <td>@venue.Capacity</td>
+                <td>@v.Name</td>
+                <td>@v.Location</td>
+                <td>@v.Capacity</td>
                 <td>
-                    @if (!string.IsNullOrEmpty(venue.ImageUrl))
+                    @if (!string.IsNullOrEmpty(v.ImageUrl))
                     {
-                        <img src="@venue.ImageUrl" alt="Venue Image" width="100" />
+                        <img src="@v.ImageUrl" alt="Venue Image" width="100" />
                     }
                     else
                     {
-                        <span>No Image</span>
+                        <span>No image</span>
                     }
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@venue.VenueId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@venue.VenueId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@venue.VenueId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@v.VenueId" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@v.VenueId" class="btn btn-sm btn-outline-secondary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@v.VenueId" class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }

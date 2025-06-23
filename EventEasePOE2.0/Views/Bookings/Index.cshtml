@@ -2,56 +2,74 @@
 
 @{
     ViewData["Title"] = "Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Bookings</h2>
+<h2 class="mb-4">Bookings</h2>
 
-<form method="get" asp-action="Index">
-    <div>
-        <label>Event Name:</label>
-        <input type="text" name="eventName" value="@ViewData["CurrentFilter"]" />
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> @TempData["ErrorMessage"]
     </div>
-    <div>
-        <label>Venue:</label>
-        <select name="venueId">
-            <option value="">-- All Venues --</option>
-            @foreach (var venue in ViewBag.Venues)
-            {
-                <option value="@venue.VenueId">@venue.Name</option>
-            }
-        </select>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        <strong>Success:</strong> @TempData["SuccessMessage"]
     </div>
-    <div>
-        <label>Status:</label>
-        <select name="status">
-            <option value="">-- All Statuses --</option>
-            <option value="pending">Pending</option>
-            <option value="confirmed">Confirmed</option>
-            <option value="cancelled">Cancelled</option>
-        </select>
+}
+
+<form method="get" asp-action="Index" class="mb-4">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label">Event Name:</label>
+            <input type="text" name="eventName" value="@ViewData["CurrentFilter"]" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Venue:</label>
+            <select name="venueId" class="form-select">
+                <option value="">-- All Venues --</option>
+                @foreach (var venue in ViewBag.Venues)
+                {
+                    <option value="@venue.VenueId">@venue.Name</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Status:</label>
+            <select name="status" class="form-select">
+                <option value="">-- All Statuses --</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Start Date:</label>
+            <input type="date" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">End Date:</label>
+            <input type="date" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
     </div>
-    <div>
-        <label>Start Date:</label>
-        <input type="date" name="startDate" value="@ViewBag.StartDate" />
-    </div>
-    <div>
-        <label>End Date:</label>
-        <input type="date" name="endDate" value="@ViewBag.EndDate" />
-    </div>
-    <button type="submit">Search</button>
 </form>
 
-<a asp-action="Create">Create New Booking</a>
+<a asp-action="Create" class="btn btn-success mb-3">Create New Booking</a>
 
-<table>
-    <thead>
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
         <tr>
             <th>Event</th>
             <th>Venue</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Status</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -64,9 +82,9 @@
                 <td>@b.EndDate.ToShortDateString()</td>
                 <td>@b.Status</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@b.BookingId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@b.BookingId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@b.BookingId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@b.BookingId" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@b.BookingId" class="btn btn-sm btn-outline-secondary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@b.BookingId" class="btn btn-sm btn-outline-danger">Delete</a>
                 </td>
             </tr>
         }

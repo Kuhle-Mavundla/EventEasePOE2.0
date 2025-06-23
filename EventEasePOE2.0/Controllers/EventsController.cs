@@ -77,27 +77,30 @@ namespace EventEasePOE.Controllers
             return @event == null ? NotFound() : View(@event);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
-            var @event = await _context.Events.FindAsync(id);
-            return @event == null ? NotFound() : View(@event);
+            if (id == null) return NotFound();
+
+            var @event = await _context.Events
+                .Include(e => e.Venue)
+                .FirstOrDefaultAsync(m => m.EventId == id);
+
+            if (@event == null) return NotFound();
+
+            return View(@event);
         }
 
-        [HttpPost, ActionName("Delete")]
+        // POST: Events/DeleteConfirmed/1
+        [HttpPost, ActionName("DeleteConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @event = await _context.Events.Include(e => e.Bookings).FirstOrDefaultAsync(e => e.EventId == id);
-            if (@event == null) return NotFound();
-
-            if (@event.Bookings.Any())
+            var @event = await _context.Events.FindAsync(id);
+            if (@event != null)
             {
-                ModelState.AddModelError("", "Cannot delete event with existing bookings.");
-                return View(@event);
+                _context.Events.Remove(@event);
+                await _context.SaveChangesAsync();
             }
-
-            _context.Events.Remove(@event);
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

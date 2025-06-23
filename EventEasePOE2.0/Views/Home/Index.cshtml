@@ -1,8 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="text-center p-4 bg-light rounded shadow-sm">
+        <h1 class="display-4 text-primary fw-bold">Welcome to EventEase</h1>
+        <p class="lead text-muted">Your go-to venue and event booking system.</p>
+        <hr class="my-4" />
+        <p class="mb-4">Use the navigation menu to manage Venues, Events, Bookings, and Event Types.</p>
+        <a href="/Bookings" class="btn btn-primary btn-lg px-4">Get Started</a>
+    </div>
 </div>

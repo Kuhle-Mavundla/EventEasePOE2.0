@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<EventEasePOE2._0.Models.EventType>
 
-<h2>Event Types</h2>
+@{
+    ViewData["Title"] = "Event Types";
+}
 
-<a asp-action="Create">Create New Event Type</a>
+<h2 class="mb-4">@ViewData["Title"]</h2>
 
-<table>
-    <thead>
+<a asp-action="Create" class="btn btn-success mb-3">Create New Event Type</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-light">
         <tr>
             <th>Name</th>
             <th>Description</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -19,8 +23,8 @@
                 <td>@type.Name</td>
                 <td>@type.Description</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@type.EventTypeId">Edit</a> |
-                    <a asp-action="Delete" asp-route-id="@type.EventTypeId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@type.EventTypeId" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@type.EventTypeId" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
                 </td>
             </tr>
         }

@@ -61,9 +61,14 @@ namespace EventEasePOE2._0.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var type = await _context.EventTypes.FindAsync(id);
+            if (type == null)
+            {
+                return NotFound();
+            }
             _context.EventTypes.Remove(type);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

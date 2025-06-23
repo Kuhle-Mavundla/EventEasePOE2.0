@@ -6,11 +6,11 @@ using EventEasePOE2._0.Data;
 
 namespace EventEasePOE.Controllers
 {
-    public class EventController : Controller
+    public class EventsController : Controller
     {
         private readonly EventEasePOE2_0Context _context;
 
-        public EventController(EventEasePOE2_0Context context)
+        public EventsController(EventEasePOE2_0Context context)
         {
             _context = context;
         }

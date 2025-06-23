@@ -2,12 +2,11 @@
 
 <h2>Booking Details</h2>
 
-<div>
-    <p><strong>Event:</strong> @Model.Event?.Name</p>
-    <p><strong>Venue:</strong> @Model.Venue?.Name</p>
-    <p><strong>Booking Date:</strong> @Model.StartDate.ToShortDateString()</p>
-    <p><strong>Booking Date:</strong> @Model.EndDate.ToShortDateString()</p>
-    <p><strong>Status:</strong> @Model.Status</p>
-</div>
+<p><strong>Event:</strong> @Model.Event?.Name</p>
+<p><strong>Venue:</strong> @Model.Venue?.Name</p>
+<p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
+<p><strong>End Date:</strong> @Model.EndDate.ToShortDateString()</p>
+<p><strong>Status:</strong> @Model.Status</p>
 
+<a asp-action="Edit" asp-route-id="@Model.BookingId">Edit</a> |
 <a asp-action="Index">Back to List</a>

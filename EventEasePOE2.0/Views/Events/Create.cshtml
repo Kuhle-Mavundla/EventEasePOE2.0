@@ -1,14 +1,11 @@
 ﻿@model EventEasePOE2._0.Models.Event
 
-@using Microsoft.AspNetCore.Mvc.Rendering
-
 <h2>Create Event</h2>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create">
     <div>
         <label asp-for="Name"></label>
         <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
     </div>
     <div>
         <label asp-for="Description"></label>
@@ -17,26 +14,14 @@
     <div>
         <label asp-for="EventDate"></label>
         <input asp-for="EventDate" type="date" />
-        <span asp-validation-for="EventDate"></span>
     </div>
     <div>
-        <label>Venue</label>
-        <select asp-for="VenueId" asp-items="ViewBag.Venues">
-            <option value="">-- Select Venue --</option>
-        </select>
+        <label asp-for="EventTypeId"></label>
+        <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes"></select>
     </div>
     <div>
-        <label>Event Type</label>
-        <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes">
-            <option value="">-- Select Event Type --</option>
-        </select>
-    </div>
-    <div>
-        <label asp-for="Status"></label>
-        <input asp-for="Status" />
-        <span asp-validation-for="Status"></span>
+        <label asp-for="VenueId"></label>
+        <select asp-for="VenueId" asp-items="ViewBag.Venues"></select>
     </div>
     <button type="submit">Create</button>
 </form>
-
-<a asp-action="Index">Back to List</a>

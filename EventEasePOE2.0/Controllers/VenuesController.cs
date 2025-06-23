@@ -139,19 +139,32 @@ namespace EventEasePOE2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var venue = await _context.Venues.FindAsync(id);
-            if (venue != null)
+            var venue = await _context.Venues
+                .Include(v => v.Bookings)
+                .Include(v => v.Events)
+                .FirstOrDefaultAsync(v => v.VenueId == id);
+
+            if (venue == null)
             {
-                _context.Venues.Remove(venue);
+                return NotFound();
             }
 
+            if (venue.Bookings.Any() || venue.Events.Any())
+            {
+                TempData["ErrorMessage"] = "Cannot delete venue with existing bookings or events.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Venues.Remove(venue);
             await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = "Venue deleted successfully.";
             return RedirectToAction(nameof(Index));
         }
-
         private bool VenueExists(int id)
         {
             return _context.Venues.Any(e => e.VenueId == id);
         }
     }
 }
+

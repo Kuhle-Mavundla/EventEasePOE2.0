@@ -1,10 +1,22 @@
 ﻿@model IEnumerable<EventEasePOE2._0.Models.Booking>
 
+@{
+    ViewData["Title"] = "Bookings";
+}
+
 <h2>Bookings</h2>
+<a asp-action="Create">Create New Booking</a>
 
 <table>
     <thead>
-        <tr><th>Event</th><th>Venue</th><th>Start</th><th>End</th></tr>
+        <tr>
+            <th>Event</th>
+            <th>Venue</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var b in Model)
@@ -14,6 +26,12 @@
                 <td>@b.Venue?.Name</td>
                 <td>@b.StartDate.ToShortDateString()</td>
                 <td>@b.EndDate.ToShortDateString()</td>
+                <td>@b.Status</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@b.BookingId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@b.BookingId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@b.BookingId">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

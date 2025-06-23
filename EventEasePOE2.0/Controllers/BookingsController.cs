@@ -7,12 +7,12 @@ using EventEasePOE2._0.Data;
 
 namespace EventEasePOE2._0.Controllers
 {
-    public class BookingController : Controller
+    public class BookingsController : Controller
     {
         private readonly EventEasePOE2_0Context _context;
         private readonly BookingService _bookingService;
 
-        public BookingController(EventEasePOE2_0Context context, BookingService bookingService)
+        public BookingsController(EventEasePOE2_0Context context, BookingService bookingService)
         {
             _context = context;
             _bookingService = bookingService;

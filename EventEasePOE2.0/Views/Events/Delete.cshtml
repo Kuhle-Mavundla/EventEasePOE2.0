@@ -4,24 +4,12 @@
 
 <p>Are you sure you want to delete this event?</p>
 
-<div>
-    <h3>@Model.Name</h3>
-    <p><strong>Date:</strong> @Model.EventDate.ToShortDateString()</p>
-    <p><strong>Venue:</strong> @Model.Venue?.Name</p>
-</div>
+<p><strong>Name:</strong> @Model.Name</p>
+<p><strong>Date:</strong> @Model.EventDate.ToShortDateString()</p>
+<p><strong>Venue:</strong> @Model.Venue?.Name</p>
 
-<form asp-action="DeleteConfirmed" method="post">
+<form asp-action="Delete">
     <input type="hidden" asp-for="EventId" />
-    <button type="submit">Delete</button> |
+    <button type="submit">Delete</button>
     <a asp-action="Index">Cancel</a>
 </form>
-
-@if (!ViewData.ModelState.IsValid)
-{
-    <div style="color:red;">
-        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-        {
-            <p>@error.ErrorMessage</p>
-        }
-    </div>
-}

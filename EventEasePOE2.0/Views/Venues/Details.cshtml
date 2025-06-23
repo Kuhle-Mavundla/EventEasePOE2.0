@@ -1,20 +1,29 @@
 ﻿@model EventEasePOE2._0.Models.Venue
 
-<h2>Venue Details</h2>
+@{
+    ViewData["Title"] = "Venue Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<div>
-    <h3>@Model.Name</h3>
-    <p><strong>Location:</strong> @Model.Location</p>
-    <p><strong>Capacity:</strong> @Model.Capacity</p>
-    @if (!string.IsNullOrEmpty(Model.ImageUrl))
-    {
-        <img src="@Model.ImageUrl" alt="Venue Image" width="200" />
-    }
-    else
-    {
-        <p>No Image Available</p>
-    }
+<h2 class="mb-4">Venue Details</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <h3 class="card-title">@Model.Name</h3>
+        <p class="card-text"><strong>Location:</strong> @Model.Location</p>
+        <p class="card-text"><strong>Capacity:</strong> @Model.Capacity</p>
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" alt="Venue Image for @Model.Name" class="img-fluid rounded" style="max-width: 300px;" />
+        }
+        else
+        {
+            <p class="text-muted">No Image Available</p>
+        }
+    </div>
 </div>
 
-<a asp-action="Edit" asp-route-id="@Model.VenueId">Edit</a> |
-<a asp-action="Index">Back to List</a>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.VenueId" class="btn btn-outline-primary me-2">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

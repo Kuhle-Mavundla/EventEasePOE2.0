@@ -21,10 +21,12 @@
     </div>
     <div>
         <label>Venue Image</label>
-        <input type="file" name="imageFile" />
+        <input type="file" name="image" />
         @if (!string.IsNullOrEmpty(Model.ImageUrl))
         {
-            <img src="@Model.ImageUrl" alt="Current Image" width="100" />
+            <div>
+                <img src="@Model.ImageUrl" alt="Current Image" width="150" />
+            </div>
         }
     </div>
     <button type="submit">Save</button>
